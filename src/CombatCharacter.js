@@ -5,28 +5,38 @@ import { Text } from './particles';
 import { controls } from './constants';
 
 const frames = {
-  idle: ['idle_1', 'idle_2', 'idle_3', 'idle_4'],
-  attack: ['attack_1', 'attack_2', 'attack_2', 'idle_1'],
+  idle: ['idle_1', 'idle_2', 'idle_3', 'idle_1'],
+  attack: ['attack_1', 'attack_2', 'attack_3', 'attack_3'],
   death: ['death', 'death', 'death', 'death']
 };
-const resetDamageNumberAnimation = () => {
-  const el = document.querySelector('.damage_number');
+const resetDamageNumberAnimation = (damageNumberClassName) => {
+  const el = document.querySelector(`.${damageNumberClassName}`);
   if (el) {
-    el.classList.remove('damage_number');
+    el.classList.remove(damageNumberClassName);
     void el.offsetWidth;
-    el.classList.add('damage_number');
+    el.classList.add(damageNumberClassName);
   }
 };
 
 export class CombatCharacter extends PureComponent {
   render() {
     const {
-      spriteAction, hp, maxHp, shields, maxShields, name, isEnemy, needToFlipImage, hpDifferential, shieldsDifferential
+      index,
+      spriteAction,
+      hp,
+      maxHp,
+      shields,
+      maxShields,
+      name,
+      isEnemy,
+      needToFlipImage,
+      hpDifferential,
+      shieldsDifferential
     } = this.props;
 
     const animationName = `sprite_animation_${name}_${spriteAction}`;
-    const animationCss = spriteAction === 'death'
-      ? `background: url("assets/${name}/death.png") no-repeat center center;`
+    const animationCss = !hp
+      ? `background: url("assets/${name}/death.png") center center / cover no-repeat;`
       : `
         ${mixins.keyframes(animationName, `
           0% { background: url("assets/${name}/${frames[spriteAction][0]}.png") center center / cover no-repeat; }
@@ -38,8 +48,9 @@ export class CombatCharacter extends PureComponent {
         animation-iteration-count: ${spriteAction === 'idle' ? 'infinite' : 1};
       `;
     const damageNumber = Math.abs(hpDifferential + shieldsDifferential);
+    const damageNumberClassName = `damage_number_${index}`;
     
-    resetDamageNumberAnimation();
+    resetDamageNumberAnimation(damageNumberClassName);
 
     return (
       <div css={combatCharacterCss(isEnemy)}>
@@ -94,8 +105,10 @@ export class CombatCharacter extends PureComponent {
           {hp} / {maxHp}<br />
           {shields ? <span className='shields'>{shields} / {maxShields}</span> : null}
         </Text>
-        {damageNumber === 0 ? null : (
-          <Text className='damage_number' type='title' color='yellow' centered>{damageNumber}</Text>
+        {!!damageNumber && (
+          <Text className={`damage_number ${damageNumberClassName}`} type='title' color='yellow' centered>
+            {damageNumber}
+          </Text>
         )}
       </div>
     );
@@ -153,11 +166,11 @@ const combatCharacterCss = (isEnemy) => css`
     opacity: 0;
 
     ${mixins.keyframes('damageNumberFadeOut', `
-      0% { top: 35%; opacity: 1; }
-      33% { top: 30%; opacity: 1; }
-      66% { top: 25%; opacity: 1; }
-      100% { top: 20%; opacity: 0; }
+      0% { top: 30%; opacity: 1; }
+      33% { top: 25%; opacity: 1; }
+      66% { top: 20%; opacity: 1; }
+      100% { top: 15%; opacity: 0; }
     `)}
-    animation: damageNumberFadeOut 1s linear;
+    animation: damageNumberFadeOut 1s ease-out;
   }
 `;

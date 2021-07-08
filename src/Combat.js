@@ -78,28 +78,21 @@ const CombatComponent = ({ characters, dungeonMapCurrentRoom, didYouWin, didEnem
     return () => clearTimeout(timeout);
   }, [attackerIndex, characters, didEnemyWin, didYouWin, dispatch]);
 
-  const spriteActionOverrides = spriteActions;
-  characters.forEach((i, index) => {
-    if (!i.hp) {
-      spriteActionOverrides[index] = 'death';
-    }
-  });
-
   return (
     <FlexContainer justifyContent='center'>
       <FlexContainer justifyContent='center' alignItems='center'>
-        <CombatCharacter spriteAction={spriteActionOverrides[0]} {...characters[0]} />
+        <CombatCharacter index={[0]} spriteAction={spriteActions[0]} {...characters[0]} />
         <div>
-          <CombatCharacter spriteAction={spriteActionOverrides[1]} {...characters[1]} />
-          <CombatCharacter spriteAction={spriteActionOverrides[2]} {...characters[2]} />
+          <CombatCharacter index={[1]} spriteAction={spriteActions[1]} {...characters[1]} />
+          <CombatCharacter index={[2]} spriteAction={spriteActions[2]} {...characters[2]} />
         </div>
       </FlexContainer>
       <FlexContainer className='p2_container' justifyContent='center' alignItems='center'>
         <div>
-          <CombatCharacter spriteAction={spriteActionOverrides[3]} {...characters[3]} />
-          <CombatCharacter spriteAction={spriteActionOverrides[4]} {...characters[4]} />
+          <CombatCharacter index={[3]} spriteAction={spriteActions[3]} {...characters[3]} />
+          <CombatCharacter index={[4]} spriteAction={spriteActions[4]} {...characters[4]} />
         </div>
-        <CombatCharacter spriteAction={spriteActionOverrides[5]} {...characters[5]} />
+        <CombatCharacter index={[5]} spriteAction={spriteActions[5]} {...characters[5]} />
       </FlexContainer>
     </FlexContainer>
   );
@@ -134,7 +127,6 @@ export const Combat = () => {
 
   useEffect(() => {
     if (didYouWin || didEnemyWin) {
-      dispatch(actions.dungeonSetCharacterStats({})); // kind of a hack, to reset damage numbers
       setTimeout(() => setShowCombatVictoryModal(true), 1000);
     }
   }, [didEnemyWin, didYouWin, dispatch]);

@@ -3,9 +3,7 @@ import { keyBy } from 'lodash';
 const allies = [
   {
     name: 'Minotaur',
-    image: 'minotaur',
     isEnemy: false,
-    needToFlipImage: true,
     maxHp: 25,
     hpGrowth: 5,
     maxShields: 0,
@@ -16,9 +14,7 @@ const allies = [
   },
   {
     name: 'Arriette',
-    image: 'arriette',
     isEnemy: false,
-    needToFlipImage: true,
     maxHp: 10,
     hpGrowth: 2,
     maxShields: 5,
@@ -29,9 +25,7 @@ const allies = [
   },
   {
     name: 'Tiamat',
-    image: 'tiamat',
     isEnemy: false,
-    needToFlipImage: true,
     maxHp: 15,
     hpGrowth: 3,
     maxShields: 2,
@@ -45,14 +39,32 @@ const allies = [
 const enemies = [
   {
     name: 'Bat',
-    image: 'bat',
     isEnemy: true,
-    needToFlipImage: false,
     maxHp: 7,
     hpGrowth: 2,
     maxShields: 0,
     shieldsGrowth: 0,
     damage: 3,
+    damageGrowth: 2
+  },
+  {
+    name: 'Plant',
+    isEnemy: true,
+    maxHp: 10,
+    hpGrowth: 3,
+    maxShields: 0,
+    shieldsGrowth: 0,
+    damage: 2,
+    damageGrowth: 1
+  },
+  {
+    name: 'Golem',
+    isEnemy: true,
+    maxHp: 15,
+    hpGrowth: 4,
+    maxShields: 0,
+    shieldsGrowth: 0,
+    damage: 1,
     damageGrowth: 1
   }
 ];
@@ -64,6 +76,7 @@ export const characters = keyBy(
     shields: i.maxShields,
     level: 1,
     hpDifferential: 0,
-    shieldsDifferential: 0
+    shieldsDifferential: 0,
+    needToFlipImage: !i.isEnemy
   })
 ), 'name');
