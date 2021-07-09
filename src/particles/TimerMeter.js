@@ -13,12 +13,11 @@ export const TimerMeter = ({ timer, text, onComplete }) => {
       height: 30px;
       border: 2px solid ${colors.yellowLight};
       border-radius: 3px;
-      margin-left: 7px;
 
       .fill {
         ${mixins.keyframes('shrink', `
-          0% { width: 100%; }
-          100% { width: 0%; }
+          0% { width: 0%; }
+          100% { width: 100%; }
         `)}
         background: ${colors.yellowLight};
         height: 100%;

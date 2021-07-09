@@ -148,7 +148,7 @@ export const Combat = () => {
       {showDungeonVictoryModal ? (
         <DungeonVictoryModal
           text={didYouWin ? 'Victory!' : 'Defeat!'}
-          closeModal={() => dispatch(actions.sceneSetScene('planning'))}
+          closeModal={() => alert('closed dungeon victory modal!')}
         />
       ) : showCombatVictoryModal ? (
         <CombatVictoryModal

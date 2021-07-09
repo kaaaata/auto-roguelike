@@ -4,6 +4,7 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import * as actions from './stores/actions';
 import { colors } from './styles';
 import { Combat } from './Combat';
+import { Planning } from './Planning';
 import { TopNav } from './TopNav';
 import { BackgroundImage } from './BackgroundImage';
 import { characters } from './constants';
@@ -29,7 +30,7 @@ const App = () => {
     ]));
     // dispatch(actions.rewardsSetRewards({ gold: random(5, 10) }));
     dispatch(actions.dungeonSetMap(genDungeonMap(1, 'short')));
-    dispatch(actions.sceneSetScene('combat'));
+    dispatch(actions.sceneSetScene('planning'));
   }, [dispatch]);
 
   const { scene } = useSelector(state => ({
@@ -40,6 +41,9 @@ const App = () => {
   switch (scene) {
     case 'combat':
       sceneComponent = <Combat />;
+      break;
+    case 'planning':
+      sceneComponent = <Planning />;
       break;
     default:
       break;

@@ -6,7 +6,7 @@ import { controls } from './constants';
 
 const frames = {
   idle: ['idle_1', 'idle_2', 'idle_3', 'idle_1'],
-  attack: ['attack_1', 'attack_2', 'attack_3', 'attack_3'],
+  attack: ['attack_1', 'attack_2', 'attack_2', 'attack_2'],
   death: ['death', 'death', 'death', 'death']
 };
 const resetDamageNumberAnimation = (damageNumberClassName) => {
@@ -45,7 +45,6 @@ export class CombatCharacter extends PureComponent {
           100% { background: url("assets/${name}/${frames[spriteAction][3]}.png") center center / cover no-repeat; }
         `)}
         animation: ${animationName} ${controls.msPerTick / 1000}s infinite;
-        animation-iteration-count: ${spriteAction === 'idle' ? 'infinite' : 1};
       `;
     const damageNumber = Math.abs(hpDifferential + shieldsDifferential);
     const damageNumberClassName = `damage_number_${index}`;

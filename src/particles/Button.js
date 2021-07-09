@@ -3,15 +3,15 @@ import { colors } from '../styles';
 import { Text } from './Text';
 
 const buttonTypeWidths = {
-  default: '100%',
-  mini: '200px',
+  default: '300px',
+  wide: '100%',
   'fit-content': 'fit-content'
 };
 
 export const Button = ({
   onClick,
   onMouseEnter,
-  type = 'default', // 'default'|'mini'|'fit-content'
+  type = 'default', // 'default'|'wide'|'fit-content'
   isDisabled = false,
   textProps = {},
   className = '',
@@ -24,28 +24,27 @@ export const Button = ({
     onMouseEnter={isDisabled ? undefined : onMouseEnter}
     className={`button ${className}`}
     css={css`
-      background: ${isDisabled ? colors.greyDark : colors.slateLight};
+      background: ${isDisabled ? colors.greyDark : colors.yellowLight};
       padding: 0 10px;
-      height: 32px;
-      line-height: 32px;
-      border-radius: 4px;
-      border: none;
+      height: 30px;
+      border-radius: 3px;
+      border: 2px solid ${colors.yellowLight};
       outline: none;
       width: ${buttonTypeWidths[type]};
-      color: ${colors.white};
       cursor: ${isDisabled ? 'default' : 'pointer'};
       ${centered ? '' : 'text-align: left;'}
   
       &:hover {
-        ${isDisabled ? '' : `background: ${colors.slate};`}
+        ${isDisabled ? '' : `background: ${colors.gold};`}
       }
 
       ${_css}
     `}
   >
     <Text
-      type='mini'
+      type='small'
       inline
+      color='black'
       {...textProps}
     >
       {children}

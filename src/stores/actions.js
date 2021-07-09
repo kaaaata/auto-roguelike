@@ -8,4 +8,4 @@ export const sceneSetScene = payload => ({ type: 'SET_SCENE', payload });
 
 export const playerAdjustGold = payload => ({ type: 'ADJUST_GOLD', payload });
 
-export const rewardsSetRewards = payload => ({ type: 'SET_REWARDS', payload });
+export const rewardsReceiveRewards = payload => ({ type: 'RECEIVE_REWARDS', payload });

@@ -11,7 +11,6 @@ export const Modal = ({
   shouldShowCloseButton = true,
   closeButtonText = 'Continue',
   customCloseButton = null,
-  isTopNavPresent = true,
   children
 }) => {
   const modalTitle = title && (
@@ -23,40 +22,42 @@ export const Modal = ({
   );
 
   const closeButton = !halfModal && shouldShowCloseButton && closeModal && (
-    <Button type='mini' onClick={closeModal} centered>{closeButtonText}</Button>
+    <Button onClick={closeModal} centered>{closeButtonText}</Button>
   );
 
   const modal = (
     <div
-      css={modalCss(isTopNavPresent)}
+      css={modalCss}
       className={`modal ${halfModal ? 'half_modal' : ''} ${transparent ? 'transparent' : ''}`}
       onClick={shouldCloseOnClick ? closeModal : undefined}
     >
       <FlexContainer alignItems='center' flexDirection='column' className='modal_content_container'>
+        <Spacer height={40} />
         {modalTitle}
         <FlexItem className='modal_children_container'>{children}</FlexItem>
         {customCloseButton || closeButton}
+        <Spacer height={40} />
       </FlexContainer>
     </div>
   );
 
   return halfModal ? (
-    <div css={unclickableAreaCss(isTopNavPresent)} onClick={shouldCloseOnClick ? closeModal : undefined}>
+    <div css={unclickableAreaCss} onClick={shouldCloseOnClick ? closeModal : undefined}>
       {modal}
     </div>
   ) : modal;
 };
 
-const unclickableAreaCss = (isTopNavPresent) => css`
+const unclickableAreaCss = css`
   position: absolute;
   width: 100%;
-  height: calc(100% - ${isTopNavPresent ? '40px' : '0px'});
+  height: 100%;
   bottom: 0;
 `;
-const modalCss = (isTopNavPresent) => css`
+const modalCss = css`
   position: absolute;
   width: 100%;
-  height: calc(100% - ${isTopNavPresent ? '40px' : '0px'});
+  height: 100%;
   bottom: 0;
   background: rgba(0, 0, 0, 1);
   font-size: 20px;

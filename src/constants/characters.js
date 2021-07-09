@@ -67,7 +67,8 @@ const enemies = [
     damage: 1,
     damageGrowth: 1
   }
-];
+// ];
+].map(i => ({ ...i, maxHp: 1 }));
 
 export const characters = keyBy(
   [...allies, ...enemies].map(i => ({

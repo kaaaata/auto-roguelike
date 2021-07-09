@@ -7,10 +7,15 @@ const backgroundImageCss = css`
 
 export const BackgroundImage = ({ scene }) => {
   let backgroundImage = 'bg_cave_opening.jpg';
-  if (scene === 'combat') {
-    backgroundImage = 'bg_blue_cavern.jpg';
+  
+  switch (scene) {
+    case 'combat':
+      backgroundImage = 'bg_blue_cavern.jpg';
+      break;
+    default:
+      break;
   }
-
+  
   return (
     <Image
       src={backgroundImage}

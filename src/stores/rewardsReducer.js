@@ -1,13 +1,13 @@
 const genInitialState = () => ({
-  gold: null
+  rewards: []
 });
 
 export const rewardsReducer = (state = genInitialState(), action) => {
   switch (action.type) {
-    case 'SET_REWARDS':
+    case 'RECEIVE_REWARDS':
       return {
         ...state,
-        ...action.payload
+        rewards: [...state.rewards, ...action.payload]
       };
     default:
       return state;
