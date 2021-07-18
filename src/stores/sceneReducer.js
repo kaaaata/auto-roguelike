@@ -1,5 +1,6 @@
 const genInitialState = () => ({
-  scene: null
+  scene: null,
+  combatTransitionFlipper: false
 });
 
 export const sceneReducer = (state = genInitialState(), action) => {
@@ -8,6 +9,11 @@ export const sceneReducer = (state = genInitialState(), action) => {
       return {
         ...state,
         scene: action.payload
+      };
+    case 'DRAW_CURTAIN':
+      return {
+        ...state,
+        combatTransitionFlipper: !state.combatTransitionFlipper
       };
     default:
       return state;

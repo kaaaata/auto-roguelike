@@ -76,6 +76,7 @@ export const characters = keyBy(
     hp: i.maxHp,
     shields: i.maxShields,
     level: 1,
+    xp: 0,
     hpDifferential: 0,
     shieldsDifferential: 0,
     needToFlipImage: !i.isEnemy

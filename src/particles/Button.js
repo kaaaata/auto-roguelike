@@ -3,7 +3,7 @@ import { colors } from '../styles';
 import { Text } from './Text';
 
 const buttonTypeWidths = {
-  default: '300px',
+  default: '225px',
   wide: '100%',
   'fit-content': 'fit-content'
 };
@@ -46,6 +46,7 @@ export const Button = ({
       inline
       color='black'
       {...textProps}
+      _css='text-shadow: none;'
     >
       {children}
     </Text>

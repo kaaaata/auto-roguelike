@@ -1,7 +1,6 @@
-import { css } from '@emotion/react'; /** @jsxImportSource @emotion/react */
 import * as actions from './stores/actions';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-import { FlexContainer, Gold, Modal, Spacer, Text } from './particles';
+import { FlexContainer, Modal, Spacer, Text } from './particles';
 import { sum } from 'lodash';
 
 export const DungeonVictoryModal = ({ text, closeModal }) => {
@@ -27,12 +26,12 @@ export const DungeonVictoryModal = ({ text, closeModal }) => {
           <span className='green'>{dungeonMapCurrentRoom}/{dungeonMapCurrentRoom}</span> rooms completed! This dungeon's spoils are rightfully yours.
         </Text>
         <Spacer height={40} />
-        <FlexContainer flexWrap='wrap' _css={css`gap: 60px;`}>
-          {rewards.map(i => (
+        <FlexContainer flexWrap='wrap' gap='60px'>
+          {/* {rewards.map(i => (
             <>
               {i.type === 'gold' ? <Gold gold={i.value} /> : null}
             </>
-          ))}
+          ))} */}
         </FlexContainer>
       </FlexContainer>
     </Modal>

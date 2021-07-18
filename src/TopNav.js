@@ -1,17 +1,17 @@
 import { css } from '@emotion/react'; /** @jsxImportSource @emotion/react */
 import { shallowEqual, useSelector } from 'react-redux';
-import { FlexContainer, Gold, Spacer } from './particles';
+import { FlexContainer, Coins, Spacer } from './particles';
 import { colors } from './styles';
 
 export const TopNav = () => {
-  const { gold } = useSelector(state => ({
-    gold: state.playerReducer.gold
+  const { coins } = useSelector(state => ({
+    coins: state.playerReducer.coins
   }), shallowEqual);
 
   return (
     <FlexContainer css={topNavCss}>
       <Spacer width={20} />
-      <Gold gold={gold} />
+      <Coins coins={coins} />
     </FlexContainer>
   )
 };

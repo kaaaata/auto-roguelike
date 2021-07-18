@@ -4,12 +4,14 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import * as actions from './stores/actions';
 import { colors } from './styles';
 import { Combat } from './Combat';
+import { Map } from './Map';
 import { Planning } from './Planning';
 import { TopNav } from './TopNav';
 import { BackgroundImage } from './BackgroundImage';
 import { characters } from './constants';
 import { genDungeonMap } from './gameplay/genDungeonMap';
 import { Spacer } from './particles';
+import { CombatTransition } from './CombatTransition';
 
 // const inDevelopment = process.env.NODE_ENV !== 'production';
 
@@ -23,14 +25,8 @@ const App = () => {
       { ...characters['Arriette'] },
       { ...characters['Tiamat'] }
     ]));
-    dispatch(actions.dungeonSetEnemies([
-      { ...characters['Bat'] },
-      { ...characters['Bat'] },
-      { ...characters['Bat'] }
-    ]));
-    // dispatch(actions.rewardsSetRewards({ gold: random(5, 10) }));
-    dispatch(actions.dungeonSetMap(genDungeonMap(1, 'short')));
-    dispatch(actions.sceneSetScene('planning'));
+    dispatch(actions.dungeonSetMap({ map: genDungeonMap(9, 1), level: 1 }));
+    dispatch(actions.sceneSetScene('map'));
   }, [dispatch]);
 
   const { scene } = useSelector(state => ({
@@ -45,6 +41,9 @@ const App = () => {
     case 'planning':
       sceneComponent = <Planning />;
       break;
+    case 'map':
+      sceneComponent = <Map />;
+      break;
     default:
       break;
   }
@@ -56,6 +55,7 @@ const App = () => {
       <div className='scene'>
         <Spacer height={60} />
         {sceneComponent}
+        <CombatTransition />
       </div>
     </main>
   );

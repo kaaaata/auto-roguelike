@@ -5,9 +5,11 @@ export const FlexContainer = ({
   className = '',
   id,
   justifyContent,
+  alignContent,
   alignItems,
   flexDirection,
   flexWrap,
+  gap,
   _css = '',
   onClick,
   children
@@ -15,9 +17,11 @@ export const FlexContainer = ({
   const flexContainerCss = css`
     display: flex;
     ${mq.genResponsiveCss('justify-content', justifyContent)}
+    ${mq.genResponsiveCss('align-content', alignContent)}
     ${mq.genResponsiveCss('align-items', alignItems)}
     ${mq.genResponsiveCss('flex-direction', flexDirection)}
     ${mq.genResponsiveCss('flex-wrap', flexWrap)}
+    ${mq.genResponsiveCss('gap', gap)}
     ${_css}
   `;
 

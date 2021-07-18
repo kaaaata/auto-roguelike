@@ -1,8 +1,9 @@
 import { css } from '@emotion/react'; /** @jsxImportSource @emotion/react */
-import { FlexContainer, Gold, Modal, Spacer } from './particles';
+import { RewardsDisplay } from './MapRewards';
+import { FlexContainer, Modal, Spacer } from './particles';
 import { TimerMeter } from './particles/TimerMeter';
 
-export const CombatVictoryModal = ({ room, text, closeModal }) => (
+export const CombatVictoryModal = ({ text, rewards, closeModal }) => (
   <Modal
     halfModal
     title={text}
@@ -10,9 +11,13 @@ export const CombatVictoryModal = ({ room, text, closeModal }) => (
     shouldShowCloseButton={false}
   >
     <FlexContainer css={combatVictoryModalCss} justifyContent='space-between' alignItems='center' flexDirection='column'>
-      {!!room.gold && <Gold gold={room.gold} />}
+      <RewardsDisplay rewards={rewards} text='Spoils' isCentered />
       <div>
-        <TimerMeter timer={2000} text='Moving to next room...' onComplete={closeModal} />
+        <TimerMeter
+          timer={2000}
+          text='Gathering loot...'
+          onComplete={closeModal}
+        />
         <Spacer height={40} />
       </div>
     </FlexContainer>

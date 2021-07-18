@@ -16,19 +16,20 @@ export const TimerMeter = ({ timer, text, onComplete }) => {
 
       .fill {
         ${mixins.keyframes('shrink', `
-          0% { width: 0%; }
-          100% { width: 100%; }
+          0% { width: 100%; }
+          100% { width: 0%; }
         `)}
         background: ${colors.yellowLight};
         height: 100%;
         animation: shrink ${timer / 1000}s linear;
         animation-iteration-count: 1;
+        animation-fill-mode: forwards;
       }
     }
   `;
 
   useEffect(() => {
-    let timeout = setTimeout(() => {
+    const timeout = setTimeout(() => {
       onComplete();
       clearTimeout(timeout);
     }, timer);

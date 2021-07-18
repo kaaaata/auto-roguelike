@@ -6,11 +6,15 @@ const backgroundImageCss = css`
 `;
 
 export const BackgroundImage = ({ scene }) => {
-  let backgroundImage = 'bg_cave_opening.jpg';
+  let backgroundImage;
   
   switch (scene) {
     case 'combat':
       backgroundImage = 'bg_blue_cavern.jpg';
+      break;
+    case 'planning':
+    case 'map':
+      backgroundImage = 'bg_cave_opening.jpg';
       break;
     default:
       break;
